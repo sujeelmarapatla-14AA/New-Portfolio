@@ -585,7 +585,7 @@ function markOf(p: { mark?: string; title: string }): string {
 }
 // #endregion art
 
-const TONE_HEX: Record<FolderTone, string> = { blue: "#C52A35", green: "#8C222B", orange: "#D44A52", yellow: "#282021" }
+const TONE_HEX: Record<FolderTone, string> = { blue: "#C52A35", green: "#991B24", orange: "#E03543", yellow: "#B8242F" }
 const TONES: FolderTone[] = ["blue", "green", "orange", "yellow"]
 
 const SECTIONS: { id: FolderSectionId; label: string; page: string }[] = [
@@ -613,10 +613,10 @@ const FTP_CSS = `
 .ftp-wrap{max-width:1240px;margin:0 auto;padding:0 20px}
 
 .ftp-folder{position:relative;padding-top:var(--th,30px);--fr:12px;--br:18px}
-.ftp-folder[data-tone="blue"],.ftp-tabshape[data-tone="blue"],.ftp-panel[data-tone="blue"]{--c:var(--ftp-blue);--on:#ffffff;--on2:rgba(255,255,255,.72)}
+.ftp-folder[data-tone="blue"],.ftp-tabshape[data-tone="blue"],.ftp-panel[data-tone="blue"]{--c:var(--ftp-blue);--on:#ffffff;--on2:rgba(255,255,255,.78)}
 .ftp-folder[data-tone="green"],.ftp-tabshape[data-tone="green"],.ftp-panel[data-tone="green"]{--c:var(--ftp-green);--on:#ffffff;--on2:rgba(255,255,255,.78)}
 .ftp-folder[data-tone="orange"],.ftp-tabshape[data-tone="orange"],.ftp-panel[data-tone="orange"]{--c:var(--ftp-orange);--on:#ffffff;--on2:rgba(255,255,255,.78)}
-.ftp-folder[data-tone="yellow"],.ftp-tabshape[data-tone="yellow"],.ftp-panel[data-tone="yellow"]{--c:var(--ftp-yellow);--on:#5d5434;--on2:rgba(93,84,52,.7)}
+.ftp-folder[data-tone="yellow"],.ftp-tabshape[data-tone="yellow"],.ftp-panel[data-tone="yellow"]{--c:var(--ftp-yellow);--on:#ffffff;--on2:rgba(255,255,255,.78)}
 .ftp-folder[data-tone="sheet"],.ftp-tabshape[data-tone="sheet"]{--c:var(--ftp-sheet);--on:var(--ftp-ink);--on2:var(--ftp-muted)}
 .ftp-tabshape[data-tone="ghost"]{--c:var(--ftp-ghost);--on:var(--ftp-muted)}
 .ftp-tabshape{position:relative;display:inline-flex;align-items:center;gap:8px;height:var(--th,30px);padding:0 16px;border-radius:var(--fr,12px) var(--fr,12px) 0 0;background:var(--c);color:var(--on);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;--fr:12px}
@@ -991,6 +991,8 @@ const FTP_CSS = `
 .mb-outline-card>.ftp-fbody::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(var(--mb-spot-size,340px) circle at var(--mb-x,-999px) var(--mb-y,-999px),rgba(225,58,67,calc(.14 * var(--mb-hot,0))) 0%,rgba(197,42,53,calc(.05 * var(--mb-hot,0))) 55%,transparent 100%);pointer-events:none;z-index:1;transition:opacity .25s ease}
 .mb-outline-card:hover>.ftp-fbody{border-color:rgba(225,58,67,.65)!important;box-shadow:0 20px 48px -14px rgba(0,0,0,.85),0 0 24px -4px rgba(197,42,53,.4)!important}
 .mb-outline-card:active>.ftp-fbody{transform:perspective(1000px) translate3d(var(--mb-tx,0px),var(--mb-ty,0px),0) rotateX(var(--mb-rx,0deg)) rotateY(var(--mb-ry,0deg)) scale(.985)}
+.ftp-dfold.mb-outline-card>.ftp-fbody{background:linear-gradient(180deg,color-mix(in srgb,var(--c) 75%,#181214) 0%,color-mix(in srgb,var(--c) 40%,#130e10) 38px,#140e10 100%)!important;border:1px solid color-mix(in srgb,var(--c) 65%,rgba(255,255,255,.12))!important}
+.ftp-dfold.mb-outline-card:hover>.ftp-fbody{border-color:var(--c)!important;box-shadow:0 20px 48px -14px rgba(0,0,0,.85),0 0 24px -4px var(--c)!important}
 
 @media (prefers-reduced-motion:reduce){
 .ftp-root *,.ftp-root *::before,.ftp-root *::after{animation:none !important;transition-duration:.01ms !important}

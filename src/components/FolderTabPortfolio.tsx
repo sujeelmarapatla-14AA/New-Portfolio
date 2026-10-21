@@ -39,10 +39,10 @@ export const FolderTabPortfolio: React.FC<FolderTabPortfolioProps> = ({ onBack }
         timeZone="Asia/Kolkata"
         email="sujeelmarapatla@gmail.com"
         colors={{
-          blue: "#C52A35",
-          green: "#8C222B",
-          orange: "#D44A52",
-          yellow: "#282021",
+          blue: "#C52A35",   // Primary Hero Crimson
+          green: "#991B24",  // Deep Ruby Wine Red
+          orange: "#E03543", // Bright Vibrant Scarlet Red
+          yellow: "#B8242F", // Rich Cardinal Red
         }}
         chapters={[
           { title: "Profile", points: ["B.Tech CSE (AIML)", "MLRIT Hyderabad"], target: "cover" },
