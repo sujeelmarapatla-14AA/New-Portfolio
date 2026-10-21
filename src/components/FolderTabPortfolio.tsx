@@ -37,6 +37,7 @@ export const FolderTabPortfolio: React.FC<FolderTabPortfolioProps> = ({ onBack }
         blurb="B.Tech Computer Science (AIML) student at MLRIT (2025–2029) focused on machine learning models, full-stack systems, and cloud architecture."
         defaultTheme="dark"
         timeZone="Asia/Kolkata"
+        cityLabel="Hyderabad"
         email="sujeelmarapatla@gmail.com"
         colors={{
           blue: "#C52A35",   // Primary Hero Crimson
@@ -218,7 +219,6 @@ export const FolderTabPortfolio: React.FC<FolderTabPortfolioProps> = ({ onBack }
           { label: "GitHub", value: "sujeelmarapatla-14AA", href: "https://github.com/sujeelmarapatla-14AA" },
           { label: "LinkedIn", value: "Sujeel Marapatla", href: "https://www.linkedin.com/in/sujeel-m-a2aa1a38a" },
           { label: "Instagram", value: "@sujeel_14_", href: "https://www.instagram.com/sujeel_14_?igsh=ejlmZXBoNjZqYm9p" },
-          { label: "Location", value: "Hyderabad, India" },
         ]}
       />
     </div>

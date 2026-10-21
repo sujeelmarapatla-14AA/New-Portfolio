@@ -114,6 +114,8 @@ export interface FolderTabPortfolioTemplateProps {
   contacts?: FolderLink[]
   /** IANA zone for the footer clock. */
   timeZone?: string
+  /** City or location name shown next to the clock in the footer. Defaults to timeZone city. */
+  cityLabel?: string
   /** Override any folder colour. */
   colors?: Partial<Record<FolderTone, string>>
   /** Join "OO" into one pill, as in PORTF◯◯LIO. */
@@ -1643,6 +1645,7 @@ export default function FolderTabPortfolioTemplate({
   email = "hello@aoilin.studio",
   contacts = DEFAULT_CONTACTS,
   timeZone = "Asia/Shanghai",
+  cityLabel = "Hyderabad",
   colors,
   ligatures = true,
   defaultTheme = "system",
@@ -2565,7 +2568,7 @@ export default function FolderTabPortfolioTemplate({
           {clock && (
             <span className="ftp-clock">
               <i data-day={clock.day ? "true" : "false"} />
-              {clock.time} · {timeZone.split("/").pop()?.replace(/_/g, " ")}
+              {clock.time} · {cityLabel || timeZone.split("/").pop()?.replace(/_/g, " ")}
             </span>
           )}
           <button type="button" className="ftp-top" onClick={() => goTo("cover")}>
