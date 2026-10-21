@@ -52,3 +52,27 @@ body {
 .cursor-blink {
   animation: blink 1s step-end infinite;
 }
+
+/* Custom Cursor Rules */
+@media (hover: hover) and (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor body,
+  html.has-custom-cursor a,
+  html.has-custom-cursor button,
+  html.has-custom-cursor [role="button"],
+  html.has-custom-cursor [onclick],
+  html.has-custom-cursor .cursor-pointer {
+    cursor: none !important;
+  }
+
+  html.has-custom-cursor input[type="text"],
+  html.has-custom-cursor input[type="email"],
+  html.has-custom-cursor input[type="search"],
+  html.has-custom-cursor input[type="tel"],
+  html.has-custom-cursor input[type="url"],
+  html.has-custom-cursor input[type="password"],
+  html.has-custom-cursor textarea,
+  html.has-custom-cursor [contenteditable="true"] {
+    cursor: text !important;
+  }
+}
