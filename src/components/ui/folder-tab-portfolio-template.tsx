@@ -950,12 +950,9 @@ const FTP_CSS = `
 .ftp-skills-gallery-viewport{position:relative;width:100%;height:580px}
 @media(max-width:768px){.ftp-skills-gallery-viewport{height:460px}.ftp-skills-gallery-header{padding:14px 16px}}
 
-/* Interactive Curved Loop Ribbon Card */
-.ftp-curved-loop-card{position:relative;margin-top:28px;border-radius:20px;background:radial-gradient(120% 120% at 50% 15%,rgba(197,42,53,.14) 0%,#201819 55%,#151112 100%);border:1px solid rgba(197,42,53,.35);box-shadow:0 16px 40px -12px rgba(0,0,0,.7),0 0 20px -6px rgba(197,42,53,.22);overflow:hidden;padding:16px 14px 10px}
-.ftp-curved-loop-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:0 8px 10px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ftp-muted);font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
-.ftp-curved-loop-badge{display:inline-flex;align-items:center;gap:8px;color:#fff;padding:4px 12px;border-radius:99px;background:rgba(197,42,53,.25);border:1px solid rgba(197,42,53,.45);font-size:10px}
-.ftp-curved-loop-viewport{position:relative;width:100%;height:140px;display:flex;align-items:center;justify-content:center}
-@media(max-width:768px){.ftp-curved-loop-card{padding:12px 10px 8px;margin-top:20px}.ftp-curved-loop-viewport{height:100px}.ftp-curved-loop-meta{font-size:10px}}
+/* Seamless Ambient Curved Loop */
+.ftp-curved-loop-blend{position:relative;width:100%;margin:24px 0 4px;overflow:hidden;opacity:.55;transition:opacity .35s ease}
+.ftp-curved-loop-blend:hover{opacity:.9}
 
 /* Compact Skills Grid */
 .ftp-skills-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:24px}
@@ -2568,34 +2565,25 @@ export default function FolderTabPortfolioTemplate({
             )}
           </div>
 
-          {/* Interactive Curved Loop Ribbon */}
+          {/* Ambient Blended Curved Loop */}
           {curvedLoopText && (
-            <div className="ftp-curved-loop-card">
-              <div className="ftp-curved-loop-meta">
-                <div className="ftp-curved-loop-badge">
-                  <span className="ftp-skills-orbit-dot" />
-                  <span>INTERACTIVE RIBBON</span>
-                </div>
-                <span>✦ DRAG OR FLING TO SPIN • HOVER TO PAUSE</span>
-              </div>
-              <div className="ftp-curved-loop-viewport">
-                <CurvedLoop
-                  marqueeText={curvedLoopText}
-                  shape="wave"
-                  speed={1.6}
-                  curveAmount={70}
-                  direction="left"
-                  fontSize={32}
-                  fontWeight={700}
-                  letterSpacing={2}
-                  separator="✦"
-                  separatorColor="#E13A43"
-                  color="#F5F0EF"
-                  edgeFade={0.2}
-                  interactive={true}
-                  pauseOnHover={true}
-                />
-              </div>
+            <div className="ftp-curved-loop-blend">
+              <CurvedLoop
+                marqueeText={curvedLoopText}
+                shape="wave"
+                speed={1.4}
+                curveAmount={65}
+                direction="left"
+                fontSize={30}
+                fontWeight={700}
+                letterSpacing={2}
+                separator="✦"
+                separatorColor="#C52A35"
+                color="rgba(245, 240, 239, 0.55)"
+                edgeFade={0.25}
+                interactive={true}
+                pauseOnHover={false}
+              />
             </div>
           )}
         </section>
