@@ -38,6 +38,7 @@ export const FolderTabPortfolio: React.FC<FolderTabPortfolioProps> = ({ onBack }
         defaultTheme="dark"
         timeZone="Asia/Kolkata"
         cityLabel="Hyderabad"
+        curvedLoopText="LET'S CONNECT ✦ OPEN FOR INTERNSHIPS & COLLABORATIONS ✦ SUJEEL MARAPATLA ✦ B.TECH CSE (AIML) ✦ HYDERABAD ✦"
         email="sujeelmarapatla@gmail.com"
         colors={{
           blue: "#C52A35",   // Primary Hero Crimson
