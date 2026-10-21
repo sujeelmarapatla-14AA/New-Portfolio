@@ -13,6 +13,9 @@
 // generated from your name, and the photo, project covers and palm watermark
 // are all SVG. Pass your own content through props; empty sections hide.
 import * as React from "react"
+import CircularGallery, { type CircularGalleryItem } from "./CircularGallery"
+
+export type { CircularGalleryItem }
 
 export type FolderTone = "blue" | "green" | "orange" | "yellow"
 export type CoverKind = "poster" | "render" | "page" | "sale" | "brand"
@@ -100,6 +103,7 @@ export interface FolderTabPortfolioTemplateProps {
   highlights?: FolderHighlight[]
   timeline?: FolderTimelineItem[]
   skills?: FolderSkillGroup[]
+  skillGalleryItems?: CircularGalleryItem[]
   certifications?: FolderCertification[]
   categories?: FolderCategory[]
   projects?: FolderProject[]
@@ -129,6 +133,82 @@ const DEFAULT_CATEGORIES: FolderCategory[] = [
   { id: "details", label: "Details", local: "詳情頁設計", tone: "green", kind: "page" },
   { id: "posters", label: "Posters", local: "運營海報", tone: "blue", kind: "poster" },
 ]
+
+export const DEFAULT_SKILL_GALLERY_ITEMS: CircularGalleryItem[] = [
+  {
+    image: "/skills/python.png",
+    text: "Python",
+    description: "Core algorithms, machine learning workflows, automation scripting, and backend system development.",
+    alt: "Python"
+  },
+  {
+    image: "/skills/ai-ml.png",
+    text: "AI & Machine Learning",
+    description: "Foundational ML modeling, supervised/unsupervised learning, neural architectures, and data engineering.",
+    alt: "AI and Machine Learning"
+  },
+  {
+    image: "/skills/llm.png",
+    text: "Prompt & LLMs",
+    description: "LLM orchestration, prompt design patterns, generative AI synthesis, and conversational agents.",
+    alt: "Prompt and LLM Workflows"
+  },
+  {
+    image: "/skills/react.png",
+    text: "Next.js & React",
+    description: "Component-driven UI architecture, reactive state management, responsive designs, and modern web apps.",
+    alt: "Next.js and React"
+  },
+  {
+    image: "/skills/sql.png",
+    text: "SQL Relational DB",
+    description: "Relational database schema design, complex joins, views, indexing strategies, and analytical queries.",
+    alt: "SQL Relational Database"
+  },
+  {
+    image: "/skills/dbms.png",
+    text: "DBMS Architecture",
+    description: "Database normalization (1NF-BCNF), ACID transaction guarantees, concurrency control, and schema optimization.",
+    alt: "DBMS and Schema Design"
+  },
+  {
+    image: "/skills/c.png",
+    text: "C Programming",
+    description: "Low-level procedural programming, pointers, manual memory allocation, and algorithmic data structures.",
+    alt: "C Programming"
+  },
+  {
+    image: "/skills/java.png",
+    text: "Java Enterprise",
+    description: "Object-oriented programming (OOP), enterprise architecture, inheritance, polymorphism, and multithreading.",
+    alt: "Java"
+  },
+  {
+    image: "/skills/mongodb.png",
+    text: "MongoDB (Credly)",
+    description: "Document database architecture, BSON CRUD operations, aggregation pipelines, and indexing schemas.",
+    alt: "MongoDB"
+  },
+  {
+    image: "/skills/git.png",
+    text: "Git & GitHub",
+    description: "Distributed version control, atomic commits, pull requests, branching workflows, and repo governance.",
+    alt: "Git and GitHub"
+  },
+  {
+    image: "/skills/autodesk.png",
+    text: "Autodesk Fusion",
+    description: "Parametric 3D CAD modeling, generative design principles, surface simulation, and rapid prototyping.",
+    alt: "Autodesk Fusion"
+  },
+  {
+    image: "/skills/linux.png",
+    text: "Linux & Systems",
+    description: "POSIX shell toolchains, bash automation, filesystem permissions, and process management fundamentals.",
+    alt: "Linux and Systems"
+  }
+]
+
 
 const DEFAULT_PROJECTS: FolderProject[] = [
   {
@@ -855,6 +935,16 @@ const FTP_CSS = `
 .ftp-band[data-open="true"] .ftp-band-t{white-space:normal;overflow-wrap:anywhere}
 }
 
+/* 3D Circular Skills Gallery Enclosure */
+.ftp-skills-gallery-card{position:relative;margin-top:24px;margin-bottom:34px;border-radius:24px;background:radial-gradient(120% 100% at 50% 10%,#291a1d 0%,#171113 70%,#120e0f 100%);border:1px solid rgba(197,42,53,.35);box-shadow:0 16px 48px -12px rgba(0,0,0,.75),0 0 24px -6px rgba(197,42,53,.25);overflow:hidden}
+.ftp-skills-gallery-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:18px 24px 14px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(18,14,15,.6);backdrop-filter:blur(8px)}
+.ftp-skills-gallery-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.12em;color:#fff;padding:4px 14px;border-radius:99px;background:rgba(197,42,53,.25);border:1px solid rgba(197,42,53,.5)}
+.ftp-skills-orbit-dot{width:7px;height:7px;border-radius:50%;background:#E13A43;box-shadow:0 0 8px #E13A43;animation:ftp-orbit-pulse 2s infinite ease-in-out}
+@keyframes ftp-orbit-pulse{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.4);opacity:1}}
+.ftp-skills-gallery-hint{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--ftp-muted);text-transform:uppercase;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+.ftp-skills-gallery-viewport{position:relative;width:100%;height:580px}
+@media(max-width:768px){.ftp-skills-gallery-viewport{height:460px}.ftp-skills-gallery-header{padding:14px 16px}}
+
 /* Compact Skills Grid */
 .ftp-skills-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:24px}
 @media(max-width:768px){.ftp-skills-grid{grid-template-columns:1fr;gap:16px}}
@@ -1532,6 +1622,7 @@ export default function FolderTabPortfolioTemplate({
   highlights = DEFAULT_HIGHLIGHTS,
   timeline = DEFAULT_TIMELINE,
   skills = [],
+  skillGalleryItems = DEFAULT_SKILL_GALLERY_ITEMS,
   certifications = [],
   categories = DEFAULT_CATEGORIES,
   projects = DEFAULT_PROJECTS,
@@ -1586,12 +1677,12 @@ export default function FolderTabPortfolioTemplate({
     () =>
       SECTIONS.filter((s) => {
         if (s.id === "contents") return chapters.length > 0
-        if (s.id === "skills") return skills.length > 0
+        if (s.id === "skills") return skills.length > 0 || skillGalleryItems.length > 0
         if (s.id === "work") return projects.length > 0
         if (s.id === "certifications") return certifications.length > 0
         return true
       }),
-    [chapters.length, skills.length, projects.length, certifications.length],
+    [chapters.length, skills.length, skillGalleryItems.length, projects.length, certifications.length],
   )
   const pageNo = (id: FolderSectionId) => sections.findIndex((s) => s.id === id) + 1
 
@@ -2101,44 +2192,81 @@ export default function FolderTabPortfolioTemplate({
         </section>
 
         {/* skills */}
-        {skills.length > 0 && (
+        {(skills.length > 0 || skillGalleryItems.length > 0) && (
           <section className="ftp-sheet ftp-rv" {...sheetProps("skills")}>
             {meta("skills")}
-            {head("skills", "(" + pad2(skills.length) + ")", "Skills & Stack", { local: "技能", kicker: "Core programming languages, database architectures, artificial intelligence specializations, and developer tools." })}
-            <div className="ftp-skills-grid">
-              {skills.map((group, idx) => (
-                <Folder
-                  key={group.category}
-                  tone={group.tone}
-                  tabAt={0.08}
-                  className="ftp-card"
-                  tab={
-                    <>
-                      {group.category}
-                      <span className="ftp-tchip">{pad2(idx + 1)}</span>
-                    </>
-                  }
-                >
-                  <div style={{ padding: "24px 20px" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 16 }}>
-                      <h3 style={{ fontSize: 20, fontWeight: 700, margin: 0, textTransform: "uppercase" }}>{group.category}</h3>
-                      {group.subtitle && <span style={{ fontSize: 11, opacity: 0.7, fontFamily: "ui-monospace, monospace" }}>{group.subtitle}</span>}
-                    </div>
-                    <div>
-                      {group.skills.map((sk) => (
-                        <div key={sk.name} className="ftp-skill-item">
-                          <div className="ftp-skill-name">
-                            <span style={{ color: palette[group.tone] }}>✦</span>
-                            <span>{sk.name}</span>
-                          </div>
-                          <p className="ftp-skill-desc">{sk.desc}</p>
-                        </div>
-                      ))}
-                    </div>
+            {head("skills", "(" + pad2(skillGalleryItems.length || skills.length) + ")", "Skills & Stack", { local: "技能", kicker: "Interactive 3D spatial orbit showcasing core languages, artificial intelligence specializations, databases, and developer toolchains." })}
+            
+            {/* 3D Circular Skills Gallery Showcase */}
+            {skillGalleryItems.length > 0 && (
+              <div className="ftp-skills-gallery-card">
+                <div className="ftp-skills-gallery-header">
+                  <div className="ftp-skills-gallery-badge">
+                    <span className="ftp-skills-orbit-dot" />
+                    <span>3D SPATIAL SKILLS ORBIT</span>
                   </div>
-                </Folder>
-              ))}
-            </div>
+                  <div className="ftp-skills-gallery-hint">
+                    <span>✦ DRAG OR WHEEL TO ORBIT • CLICK CARD TO INSPECT</span>
+                  </div>
+                </div>
+                <div className="ftp-skills-gallery-viewport">
+                  <CircularGallery
+                    items={skillGalleryItems}
+                    bend={3}
+                    textColor="#ffffff"
+                    borderRadius={0.06}
+                    scrollEase={0.05}
+                    scrollSpeed={2}
+                    autoScroll={0.25}
+                    fadeEdges={0.14}
+                    shadow={0.3}
+                    itemSize={1}
+                    itemAspect={0.78}
+                    openOnClick={true}
+                    onItemClick={(item, index) => {
+                      console.log("Skill selected:", item.text, index)
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+
+            {skills.length > 0 && (
+              <div className="ftp-skills-grid">
+                {skills.map((group, idx) => (
+                  <Folder
+                    key={group.category}
+                    tone={group.tone}
+                    tabAt={0.08}
+                    className="ftp-card"
+                    tab={
+                      <>
+                        {group.category}
+                        <span className="ftp-tchip">{pad2(idx + 1)}</span>
+                      </>
+                    }
+                  >
+                    <div style={{ padding: "24px 20px" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 16 }}>
+                        <h3 style={{ fontSize: 20, fontWeight: 700, margin: 0, textTransform: "uppercase" }}>{group.category}</h3>
+                        {group.subtitle && <span style={{ fontSize: 11, opacity: 0.7, fontFamily: "ui-monospace, monospace" }}>{group.subtitle}</span>}
+                      </div>
+                      <div>
+                        {group.skills.map((sk) => (
+                          <div key={sk.name} className="ftp-skill-item">
+                            <div className="ftp-skill-name">
+                              <span style={{ color: palette[group.tone] }}>✦</span>
+                              <span>{sk.name}</span>
+                            </div>
+                            <p className="ftp-skill-desc">{sk.desc}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </Folder>
+                ))}
+              </div>
+            )}
           </section>
         )}
 
