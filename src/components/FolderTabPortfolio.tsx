@@ -49,6 +49,7 @@ export const FolderTabPortfolio: React.FC<FolderTabPortfolioProps> = ({ onBack }
           { title: "Contents", points: ["Interactive Sheets", "Portfolio Index"], target: "contents" },
           { title: "About Sujeel", points: ["Academic Background", "Education History", "Highlights"], target: "about" },
           { title: "Technical Skills", points: ["3D Spatial Orbit", "AI/ML, Python, Java", "Full-Stack & Systems"], target: "skills" },
+          { title: "Engineering Bento", points: ["Magic Bento Grid", "Interactive Architecture", "Telemetry & Glow"], target: "bento" },
           { title: "Featured Projects", points: ["AWS Trek", "CareQ", "PortFolio", "OneProfile"], target: "work" },
           { title: "Certifications", points: ["JioPC AI Foundation", "Autodesk Fusion", "CIE MLRIT", "MongoDB Credly"], target: "certifications" },
           { title: "Contact & Connect", points: ["Email", "GitHub", "LinkedIn", "Instagram"], target: "contact" },

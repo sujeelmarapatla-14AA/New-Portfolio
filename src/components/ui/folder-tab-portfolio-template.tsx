@@ -14,6 +14,7 @@
 // are all SVG. Pass your own content through props; empty sections hide.
 import * as React from "react"
 import CircularGallery, { type CircularGalleryItem } from "./CircularGallery"
+import MagicBento from "./MagicBento"
 
 export type { CircularGalleryItem }
 
@@ -74,7 +75,7 @@ export type FolderCertification = {
   tone?: FolderTone
 }
 
-export type FolderSectionId = "cover" | "contents" | "about" | "skills" | "work" | "certifications" | "contact" | "process" | "words"
+export type FolderSectionId = "cover" | "contents" | "about" | "skills" | "bento" | "work" | "certifications" | "contact" | "process" | "words"
 
 export interface FolderTabPortfolioTemplateProps {
   /** Used in the greeting, the signature and alt text. */
@@ -593,6 +594,7 @@ const SECTIONS: { id: FolderSectionId; label: string; page: string }[] = [
   { id: "contents", label: "Contents", page: "Contents" },
   { id: "about", label: "About", page: "About me" },
   { id: "skills", label: "Skills", page: "Skills & Stack" },
+  { id: "bento", label: "Bento", page: "Architecture Bento" },
   { id: "work", label: "Projects", page: "Projects" },
   { id: "certifications", label: "Certifications", page: "Certifications" },
   { id: "contact", label: "Contact", page: "Contact" },
@@ -983,6 +985,18 @@ const FTP_CSS = `
 .ftp-cert-btn-verify:hover{background:#E13A43 !important}
 .ftp-lightbox{position:fixed;inset:0;z-index:9999;background:rgba(15,12,13,.88);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:20px}
 .ftp-lightbox-box{position:relative;max-width:760px;width:100%;background:#201819;border-radius:18px;overflow:hidden;border:1px solid var(--ftp-line);box-shadow:0 30px 80px rgba(0,0,0,.85);animation:ftp-pop .25s ease}
+
+/* Magic Bento Container & Outlines */
+.ftp-bento-card-container{position:relative;margin-top:24px;border-radius:24px;background:radial-gradient(120% 100% at 50% 10%,#291a1d 0%,#171113 70%,#120e0f 100%);border:1px solid rgba(197,42,53,.35);box-shadow:0 16px 48px -12px rgba(0,0,0,.75),0 0 24px -6px rgba(197,42,53,.25);padding:18px;overflow:hidden}
+
+/* Magnetic Bento Outline for Certifications, Projects, and Catalog */
+.mb-outline-card{perspective:1000px}
+.mb-outline-card>.ftp-fbody{position:relative!important;isolation:isolate;overflow:hidden;transform:perspective(1000px) translate3d(var(--mb-tx,0px),var(--mb-ty,0px),0) rotateX(var(--mb-rx,0deg)) rotateY(var(--mb-ry,0deg));transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,border-color .3s ease;will-change:transform}
+.mb-outline-card>.ftp-fbody::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:radial-gradient(var(--mb-border-size,260px) circle at var(--mb-x,-999px) var(--mb-y,-999px),rgba(225,58,67,calc(.95 * var(--mb-near,0))) 0%,rgba(197,42,53,calc(.65 * var(--mb-near,0))) 35%,rgba(197,42,53,calc(.18 * var(--mb-near,0))) 70%,transparent 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);pointer-events:none;z-index:12;transition:opacity .25s ease}
+.mb-outline-card>.ftp-fbody::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(var(--mb-spot-size,320px) circle at var(--mb-x,-999px) var(--mb-y,-999px),rgba(225,58,67,calc(.12 * var(--mb-hot,0))) 0%,rgba(197,42,53,calc(.04 * var(--mb-hot,0))) 55%,transparent 100%);pointer-events:none;z-index:1;transition:opacity .25s ease}
+.mb-outline-card:hover>.ftp-fbody{border-color:rgba(225,58,67,.55)!important;box-shadow:0 20px 48px -16px rgba(0,0,0,.8),0 0 22px -4px rgba(197,42,53,.35)!important}
+.mb-outline-card:active>.ftp-fbody{transform:perspective(1000px) translate3d(var(--mb-tx,0px),var(--mb-ty,0px),0) rotateX(var(--mb-rx,0deg)) rotateY(var(--mb-ry,0deg)) scale(.985)}
+
 @media (prefers-reduced-motion:reduce){
 .ftp-root *,.ftp-root *::before,.ftp-root *::after{animation:none !important;transition-duration:.01ms !important}
 .ftp-draw{stroke-dasharray:none;stroke-dashoffset:0}
@@ -1748,6 +1762,34 @@ export default function FolderTabPortfolioTemplate({
     goTo("work")
   }
 
+  const handleBentoPointerMove = React.useCallback((e: React.PointerEvent<HTMLElement>) => {
+    const el = e.currentTarget;
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const u = (x / Math.max(1, rect.width)) - 0.5;
+    const v = (y / Math.max(1, rect.height)) - 0.5;
+    
+    el.style.setProperty("--mb-x", `${x.toFixed(1)}px`);
+    el.style.setProperty("--mb-y", `${y.toFixed(1)}px`);
+    el.style.setProperty("--mb-near", "1");
+    el.style.setProperty("--mb-hot", "1");
+    el.style.setProperty("--mb-rx", `${(-v * 8).toFixed(2)}deg`);
+    el.style.setProperty("--mb-ry", `${(u * 8).toFixed(2)}deg`);
+    el.style.setProperty("--mb-tx", `${(u * 6).toFixed(1)}px`);
+    el.style.setProperty("--mb-ty", `${(v * 6).toFixed(1)}px`);
+  }, []);
+
+  const handleBentoPointerLeave = React.useCallback((e: React.PointerEvent<HTMLElement>) => {
+    const el = e.currentTarget;
+    el.style.setProperty("--mb-near", "0");
+    el.style.setProperty("--mb-hot", "0");
+    el.style.setProperty("--mb-rx", "0deg");
+    el.style.setProperty("--mb-ry", "0deg");
+    el.style.setProperty("--mb-tx", "0px");
+    el.style.setProperty("--mb-ty", "0px");
+  }, []);
+
   // Which sheet is under the middle of the viewport drives the nav and counter.
   React.useEffect(() => {
     if (typeof IntersectionObserver !== "function") return
@@ -2012,7 +2054,9 @@ export default function FolderTabPortfolioTemplate({
                   tone={c.tone}
                   glass={slot.t > 40}
                   tabAt={slot.tab}
-                  className="ftp-dfold ftp-dfold-btn"
+                  className="ftp-dfold ftp-dfold-btn mb-outline-card"
+                  onPointerMove={handleBentoPointerMove}
+                  onPointerLeave={handleBentoPointerLeave}
                   style={{ "--l": slot.l, "--w": slot.w, "--t": slot.t + "px", "--mt": i * 54 + "px" } as Vars}
                   tab={
                     <>
@@ -2052,7 +2096,9 @@ export default function FolderTabPortfolioTemplate({
                     key={ch.title + i}
                     tone={open ? "blue" : "sheet"}
                     tabAt={slot}
-                    className="ftp-band"
+                    className="ftp-band mb-outline-card"
+                    onPointerMove={handleBentoPointerMove}
+                    onPointerLeave={handleBentoPointerLeave}
                     data-open={open ? "true" : "false"}
                     tab={
                       <>
@@ -2270,6 +2316,24 @@ export default function FolderTabPortfolioTemplate({
           </section>
         )}
 
+        {/* bento */}
+        <section className="ftp-sheet ftp-rv" {...sheetProps("bento")}>
+          {meta("bento")}
+          {head("bento", "(06)", "Magic Bento", { local: "系統架構", kicker: "Interactive system architecture and telemetry bento grid with real-time border glow, spotlight dynamics, and reactive widgets." })}
+          <div className="ftp-bento-card-container">
+            <MagicBento
+              columns={4}
+              rowHeight={200}
+              gap={12}
+              radius={20}
+              enableBorderGlow={true}
+              enableSpotlight={true}
+              spotlightRadius={300}
+              clickEffect={true}
+            />
+          </div>
+        </section>
+
         {/* work */}
         {projects.length > 0 && (
           <section className="ftp-sheet ftp-rv" {...sheetProps("work")}>
@@ -2288,7 +2352,9 @@ export default function FolderTabPortfolioTemplate({
                     as="button"
                     tone={tone}
                     tabAt={(k * 0.37) % 1 > 0.85 ? 0.85 : (k * 0.37) % 1}
-                    className="ftp-card"
+                    className="ftp-card mb-outline-card"
+                    onPointerMove={handleBentoPointerMove}
+                    onPointerLeave={handleBentoPointerLeave}
                     style={{ "--i": k } as Vars}
                     tab={
                       <>
@@ -2419,7 +2485,9 @@ export default function FolderTabPortfolioTemplate({
                     key={cert.title + idx}
                     tone={tone}
                     tabAt={0.06}
-                    className="ftp-card"
+                    className="ftp-card mb-outline-card"
+                    onPointerMove={handleBentoPointerMove}
+                    onPointerLeave={handleBentoPointerLeave}
                     tab={
                       <>
                         {cert.issuer}
