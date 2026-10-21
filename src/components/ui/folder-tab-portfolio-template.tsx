@@ -2271,43 +2271,6 @@ export default function FolderTabPortfolioTemplate({
                 </div>
               </div>
             )}
-
-            {skills.length > 0 && (
-              <div className="ftp-skills-grid">
-                {skills.map((group, idx) => (
-                  <Folder
-                    key={group.category}
-                    tone={group.tone}
-                    tabAt={0.08}
-                    className="ftp-card"
-                    tab={
-                      <>
-                        {group.category}
-                        <span className="ftp-tchip">{pad2(idx + 1)}</span>
-                      </>
-                    }
-                  >
-                    <div style={{ padding: "24px 20px" }}>
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 16 }}>
-                        <h3 style={{ fontSize: 20, fontWeight: 700, margin: 0, textTransform: "uppercase" }}>{group.category}</h3>
-                        {group.subtitle && <span style={{ fontSize: 11, opacity: 0.7, fontFamily: "ui-monospace, monospace" }}>{group.subtitle}</span>}
-                      </div>
-                      <div>
-                        {group.skills.map((sk) => (
-                          <div key={sk.name} className="ftp-skill-item">
-                            <div className="ftp-skill-name">
-                              <span style={{ color: palette[group.tone] }}>✦</span>
-                              <span>{sk.name}</span>
-                            </div>
-                            <p className="ftp-skill-desc">{sk.desc}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </Folder>
-                ))}
-              </div>
-            )}
           </section>
         )}
 
