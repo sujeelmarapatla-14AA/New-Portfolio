@@ -139,73 +139,73 @@ export const DEFAULT_SKILL_GALLERY_ITEMS: CircularGalleryItem[] = [
   {
     image: "/skills/python.png",
     text: "Python",
-    description: "Core algorithms, machine learning workflows, automation scripting, and backend system development.",
+    description: "Algorithms, automation scripting, and ML backend systems.",
     alt: "Python"
   },
   {
     image: "/skills/ai-ml.png",
     text: "AI & Machine Learning",
-    description: "Foundational ML modeling, supervised/unsupervised learning, neural architectures, and data engineering.",
+    description: "Supervised and unsupervised models, neural architectures.",
     alt: "AI and Machine Learning"
   },
   {
     image: "/skills/llm.png",
     text: "Prompt & LLMs",
-    description: "LLM orchestration, prompt design patterns, generative AI synthesis, and conversational agents.",
+    description: "LLM orchestration, prompt design patterns, and agents.",
     alt: "Prompt and LLM Workflows"
   },
   {
     image: "/skills/react.png",
     text: "Next.js & React",
-    description: "Component-driven UI architecture, reactive state management, responsive designs, and modern web apps.",
+    description: "Component UI architecture and reactive state management.",
     alt: "Next.js and React"
   },
   {
     image: "/skills/sql.png",
     text: "SQL Relational DB",
-    description: "Relational database schema design, complex joins, views, indexing strategies, and analytical queries.",
+    description: "Schema design, joins, indexing, and analytical queries.",
     alt: "SQL Relational Database"
   },
   {
     image: "/skills/dbms.png",
     text: "DBMS Architecture",
-    description: "Database normalization (1NF-BCNF), ACID transaction guarantees, concurrency control, and schema optimization.",
+    description: "Normalization, ACID guarantees, and concurrency control.",
     alt: "DBMS and Schema Design"
   },
   {
     image: "/skills/c.png",
     text: "C Programming",
-    description: "Low-level procedural programming, pointers, manual memory allocation, and algorithmic data structures.",
+    description: "Pointers, memory allocation, and foundational data structures.",
     alt: "C Programming"
   },
   {
     image: "/skills/java.png",
     text: "Java Enterprise",
-    description: "Object-oriented programming (OOP), enterprise architecture, inheritance, polymorphism, and multithreading.",
+    description: "OOP principles, inheritance, and multithreaded systems.",
     alt: "Java"
   },
   {
     image: "/skills/mongodb.png",
     text: "MongoDB (Credly)",
-    description: "Document database architecture, BSON CRUD operations, aggregation pipelines, and indexing schemas.",
+    description: "BSON CRUD operations, aggregation pipelines, and indexing.",
     alt: "MongoDB"
   },
   {
     image: "/skills/git.png",
     text: "Git & GitHub",
-    description: "Distributed version control, atomic commits, pull requests, branching workflows, and repo governance.",
+    description: "Version control, branching workflows, and collaboration.",
     alt: "Git and GitHub"
   },
   {
     image: "/skills/autodesk.png",
     text: "Autodesk Fusion",
-    description: "Parametric 3D CAD modeling, generative design principles, surface simulation, and rapid prototyping.",
+    description: "Parametric 3D CAD modeling and rapid prototyping.",
     alt: "Autodesk Fusion"
   },
   {
     image: "/skills/linux.png",
     text: "Linux & Systems",
-    description: "POSIX shell toolchains, bash automation, filesystem permissions, and process management fundamentals.",
+    description: "Shell scripting, process management, and POSIX toolchains.",
     alt: "Linux and Systems"
   }
 ]
@@ -2086,7 +2086,7 @@ export default function FolderTabPortfolioTemplate({
         {chapters.length > 0 && (
           <section className="ftp-sheet ftp-rv" {...sheetProps("contents")}>
             {meta("contents")}
-            {head("contents", "(" + pad2(chapters.length) + ")", "Catalogs", { local: "（目錄）", kicker: "Table of contents for " + name + "'s " + years + " portfolio. Open a folder to see what is inside." })}
+            {head("contents", "(" + pad2(chapters.length) + ")", "Catalogs", { local: "目錄" })}
             <div className="ftp-band-list">
               {chapters.map((ch, i) => {
                 const open = chapter === i
@@ -2172,7 +2172,7 @@ export default function FolderTabPortfolioTemplate({
                   {localName ? <span style={{ fontWeight: 500, fontSize: ".5em", marginLeft: 12, color: "var(--ftp-muted)" }}>{name}</span> : null}
                 </span>
               </p>
-              <p className="ftp-kicker" style={{ marginTop: 12, maxWidth: 560 }}>{blurb}</p>
+              <p className="ftp-kicker" style={{ marginTop: 12, maxWidth: 560 }}>Computer Science (AIML) student at MLRIT specializing in machine learning systems, full-stack web applications, and cloud architecture.</p>
               {highlights.length > 0 && (
                 <div className="ftp-cols">
                   {highlights.map((h, i) => (
@@ -2191,7 +2191,7 @@ export default function FolderTabPortfolioTemplate({
               )}
               {timeline.length > 0 && (
                 <div className="ftp-tl">
-                  <span className="ftp-badge" style={{ background: palette.blue, color: "#fff" }}>Work experience</span>
+                  <span className="ftp-badge" style={{ background: palette.blue, color: "#fff" }}>Education</span>
                   <ol className="ftp-tl-track" style={{ "--n": timeline.length } as Vars}>
                     {timeline.map((t, i) => (
                       <li key={t.from + i} className="ftp-tl-item" data-on={tlOn === i ? "true" : "false"} onPointerEnter={() => setTlOn(i)} onFocus={() => setTlOn(i)} tabIndex={0}>
@@ -2241,7 +2241,7 @@ export default function FolderTabPortfolioTemplate({
         {(skills.length > 0 || skillGalleryItems.length > 0) && (
           <section className="ftp-sheet ftp-rv" {...sheetProps("skills")}>
             {meta("skills")}
-            {head("skills", "(" + pad2(skillGalleryItems.length || skills.length) + ")", "Skills & Stack", { local: "技能", kicker: "Interactive 3D spatial orbit showcasing core languages, artificial intelligence specializations, databases, and developer toolchains." })}
+            {head("skills", "(" + pad2(skillGalleryItems.length || skills.length) + ")", "Skills & Stack", { local: "技能" })}
             
             {/* 3D Circular Skills Gallery Showcase */}
             {skillGalleryItems.length > 0 && (
@@ -2252,7 +2252,7 @@ export default function FolderTabPortfolioTemplate({
                     <span>3D SPATIAL SKILLS ORBIT</span>
                   </div>
                   <div className="ftp-skills-gallery-hint">
-                    <span>✦ DRAG OR WHEEL TO ORBIT • CLICK CARD TO INSPECT</span>
+                    <span>✦ DRAG TO ORBIT • CLICK TO INSPECT</span>
                   </div>
                 </div>
                 <div className="ftp-skills-gallery-viewport">
@@ -2319,7 +2319,7 @@ export default function FolderTabPortfolioTemplate({
         {/* bento */}
         <section className="ftp-sheet ftp-rv" {...sheetProps("bento")}>
           {meta("bento")}
-          {head("bento", "(06)", "Magic Bento", { local: "系統架構", kicker: "Interactive system architecture and telemetry bento grid with real-time border glow, spotlight dynamics, and reactive widgets." })}
+          {head("bento", "(06)", "Magic Bento", { local: "系統架構" })}
           <div className="ftp-bento-card-container">
             <MagicBento
               columns={4}
@@ -2338,7 +2338,7 @@ export default function FolderTabPortfolioTemplate({
         {projects.length > 0 && (
           <section className="ftp-sheet ftp-rv" {...sheetProps("work")}>
             {meta("work")}
-            {head("work", "(" + pad2(projects.length) + ")", "Works", { local: "作品", kicker: "Filter the cabinet by folder. Open any file for its details page; arrow keys page through." })}
+            {head("work", "(" + pad2(projects.length) + ")", "Projects", { local: "作品" })}
             <div className="ftp-filter">
               <TabBar items={filterItems} active={filter} onChange={setFilter} label="Filter work by category" idBase={uid + "-wf"} />
               <div className="ftp-bar" style={{ "--c": palette[filterTone] } as Vars} />
@@ -2476,7 +2476,7 @@ export default function FolderTabPortfolioTemplate({
         {certifications.length > 0 && (
           <section className="ftp-sheet ftp-rv" {...sheetProps("certifications")}>
             {meta("certifications")}
-            {head("certifications", "(" + pad2(certifications.length) + ")", "Certifications", { local: "證書", kicker: "Verified credentials and courses in Artificial Intelligence, Web Engineering, 3D Design, and Databases." })}
+            {head("certifications", "(" + pad2(certifications.length) + ")", "Certifications", { local: "證書" })}
             <div className="ftp-certs-grid">
               {certifications.map((cert, idx) => {
                 const tone = cert.tone ?? TONES[idx % 4];
@@ -2499,7 +2499,7 @@ export default function FolderTabPortfolioTemplate({
                       <div className="ftp-cert-img-wrap" onClick={() => setPreviewCert(cert)}>
                         <img src={cert.image} alt={cert.title} className="ftp-cert-img" />
                         <div className="ftp-cert-overlay">
-                          <span className="ftp-cert-badge">View ↗</span>
+                          <span className="ftp-cert-badge">Preview</span>
                         </div>
                       </div>
                       <div className="ftp-cert-body">
@@ -2516,7 +2516,7 @@ export default function FolderTabPortfolioTemplate({
                             data-ghost="true"
                             onClick={() => setPreviewCert(cert)}
                           >
-                            Preview ↗
+                            Preview
                           </button>
                           {cert.verifyUrl && (
                             <a
@@ -2525,7 +2525,7 @@ export default function FolderTabPortfolioTemplate({
                               rel="noopener noreferrer"
                               className="ftp-btn ftp-cert-btn ftp-cert-btn-verify"
                             >
-                              Verify ↗
+                              Verify
                             </a>
                           )}
                         </div>
@@ -2543,13 +2543,13 @@ export default function FolderTabPortfolioTemplate({
           {meta("contact")}
           {head("contact", "(:)", "Contact", { local: "聯繫", withSig: true })}
           <div className="ftp-stack">
-            <Folder tone="blue" tabAt={0.78} tab={<>Reflections <Arrow size={12} /></>}>
+            <Folder tone="blue" tabAt={0.78} tab={<>Get in Touch <Arrow size={12} /></>}>
               <div className="ftp-talk">
                 <StrokeText text="Let's talk :)" weight={15} tracking={22} color="#ffffff" label="Let's talk" />
-                <p>Open to full-time roles and selected freelance from {years.split(/[–-]/).pop()}. Briefs, questions and coffee invitations all welcome.</p>
+                <p>Open to technical internships, software engineering roles, and collaborative projects.</p>
               </div>
             </Folder>
-            <Folder tone="green" tabAt={0.56} tab={<>Elevation <Arrow size={12} /></>}>
+            <Folder tone="green" tabAt={0.56} tab={<>Email <Arrow size={12} /></>}>
               <div className="ftp-mail">
                 <a className="ftp-mail-a" href={"mailto:" + email}>
                   {email}
@@ -2565,7 +2565,7 @@ export default function FolderTabPortfolioTemplate({
               </div>
             </Folder>
             {contacts.length > 0 && (
-              <Folder tone="sheet" tabAt={0.3} tab={<>Summarize <Arrow size={12} /></>} style={{ filter: "drop-shadow(0 -6px 14px rgba(27,34,52,.08))" }}>
+              <Folder tone="sheet" tabAt={0.3} tab={<>Profiles <Arrow size={12} /></>} style={{ filter: "drop-shadow(0 -6px 14px rgba(27,34,52,.08))" }}>
                 <div className="ftp-else">
                   {contacts.map((c) => {
                     const isLink = Boolean(c.href);
@@ -2620,7 +2620,6 @@ export default function FolderTabPortfolioTemplate({
               © {years.split(/[–-]/).pop()} {name}
             </small>
           </span>
-          <span>And</span>
           {clock && (
             <span className="ftp-clock">
               <i data-day={clock.day ? "true" : "false"} />
@@ -2758,7 +2757,7 @@ export default function FolderTabPortfolioTemplate({
                   className="ftp-btn"
                   style={{ fontSize: 13, padding: '6px 16px', background: 'var(--ftp-blue)', color: '#fff' }}
                 >
-                  Verify on Credly ↗
+                  Verify Credential ↗
                 </a>
               </div>
             )}

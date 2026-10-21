@@ -34,7 +34,7 @@ export const FolderTabPortfolio: React.FC<FolderTabPortfolioProps> = ({ onBack }
         notes={["Learn", "Build", "Deploy"]}
         greeting="Hello, I'm"
         photo="/sujeel-photo.jpg"
-        blurb="A dedicated Computer Science student passionate about technology and problem-solving, currently pursuing B.Tech in CSE (AIML) at MLR Institute of Technology (2025-2029). Building scalable web applications, exploring machine learning models, and turning innovative ideas into reality."
+        blurb="B.Tech Computer Science (AIML) student at MLRIT (2025–2029) focused on machine learning models, full-stack systems, and cloud architecture."
         defaultTheme="dark"
         timeZone="Asia/Kolkata"
         email="sujeelmarapatla@gmail.com"
@@ -45,22 +45,22 @@ export const FolderTabPortfolio: React.FC<FolderTabPortfolioProps> = ({ onBack }
           yellow: "#282021",
         }}
         chapters={[
-          { title: "Cover & Profile", points: ["B.Tech CSE (AIML)", "MLR Institute of Technology"], target: "cover" },
-          { title: "Contents", points: ["Interactive Sheets", "Portfolio Index"], target: "contents" },
-          { title: "About Sujeel", points: ["Academic Background", "Education History", "Highlights"], target: "about" },
-          { title: "Technical Skills", points: ["3D Spatial Orbit", "AI/ML, Python, Java", "Full-Stack & Systems"], target: "skills" },
-          { title: "Engineering Bento", points: ["Magic Bento Grid", "Interactive Architecture", "Telemetry & Glow"], target: "bento" },
-          { title: "Featured Projects", points: ["AWS Trek", "CareQ", "PortFolio", "OneProfile"], target: "work" },
-          { title: "Certifications", points: ["JioPC AI Foundation", "Autodesk Fusion", "CIE MLRIT", "MongoDB Credly"], target: "certifications" },
-          { title: "Contact & Connect", points: ["Email", "GitHub", "LinkedIn", "Instagram"], target: "contact" },
+          { title: "Profile", points: ["B.Tech CSE (AIML)", "MLRIT Hyderabad"], target: "cover" },
+          { title: "Contents", points: ["Portfolio Index", "Quick Navigation"], target: "contents" },
+          { title: "About", points: ["Academic Background", "Education History"], target: "about" },
+          { title: "Skills", points: ["AI/ML, Python, Java", "Full-Stack & Systems"], target: "skills" },
+          { title: "Bento", points: ["Interactive Widgets", "Telemetry & Glow"], target: "bento" },
+          { title: "Projects", points: ["AWS Trek, CareQ", "PortFolio, OneProfile"], target: "work" },
+          { title: "Certifications", points: ["JioPC AI, MongoDB", "Autodesk, CIE MLRIT"], target: "certifications" },
+          { title: "Contact", points: ["Email, GitHub", "LinkedIn, Socials"], target: "contact" },
         ]}
         highlights={[
           {
             label: "AI & Machine Learning",
             tone: "blue",
             lines: [
-              "Python & Machine Learning Foundations",
-              "Prompt Engineering & LLM Workflows",
+              "Python & ML Foundations",
+              "Prompt Design & LLM Workflows",
               "Algorithmic Problem Solving",
             ],
           },
@@ -68,18 +68,18 @@ export const FolderTabPortfolio: React.FC<FolderTabPortfolioProps> = ({ onBack }
             label: "Full-Stack & Systems",
             tone: "green",
             lines: [
-              "Next.js & React Frontend Systems",
-              "Java & C Systems Fundamentals",
-              "SQL Relational DB & DBMS Schema",
+              "Next.js & React Applications",
+              "Java & C Systems Programming",
+              "Relational DBMS & SQL Schema",
             ],
           },
           {
-            label: "Academics & Status",
+            label: "Academics",
             tone: "orange",
             lines: [
               "B.Tech CSE (AIML) @ MLRIT (2025–2029)",
-              "Hall Ticket No: 25R21A6637",
-              "Open to Internships & Collaborative Projects",
+              "Roll No: 25R21A6637",
+              "Open to Technical Internships",
             ],
           },
         ]}
@@ -105,51 +105,51 @@ export const FolderTabPortfolio: React.FC<FolderTabPortfolioProps> = ({ onBack }
         ]}
         skills={[
           {
-            category: "Programming Languages",
-            subtitle: "Core Foundation",
+            category: "Languages",
+            subtitle: "Core Stack",
             tone: "blue",
             skills: [
               {
                 name: "C",
-                desc: "Procedural programming, memory management, pointers, and data structures implementation.",
+                desc: "Pointers, memory allocation, and data structures.",
               },
               {
                 name: "Java",
-                desc: "Object-oriented architecture, OOP principles, inheritance, exception handling, and robust systems.",
+                desc: "OOP architecture, inheritance, and multithreading.",
               },
               {
                 name: "Python",
-                desc: "Core algorithms, automation scripts, machine learning workflows, and application development.",
+                desc: "Algorithms, automation scripting, and ML workflows.",
               },
             ],
           },
           {
-            category: "Databases & Storage",
-            subtitle: "Data Management",
+            category: "Databases",
+            subtitle: "Storage",
             tone: "green",
             skills: [
               {
                 name: "SQL",
-                desc: "Relational database querying, schema design, table joins, indexing, and data manipulation.",
+                desc: "Schema design, joins, indexing, and queries.",
               },
               {
                 name: "DBMS",
-                desc: "Database management concepts, ACID properties, normalization, and relational schema optimization.",
+                desc: "Normalization, ACID properties, and relational models.",
               },
             ],
           },
           {
-            category: "AI & Machine Learning",
+            category: "AI & ML",
             subtitle: "Specialization",
             tone: "orange",
             skills: [
               {
-                name: "AI & Machine Learning",
-                desc: "Foundational ML modeling, supervised/unsupervised learning concepts, neural networks, and algorithmic problem-solving.",
+                name: "Machine Learning",
+                desc: "Supervised and unsupervised models, neural networks.",
               },
               {
-                name: "Prompt & LLM Workflows",
-                desc: "LLM integration, prompt design, conversational agents, and AI-assisted software development.",
+                name: "Prompt Engineering",
+                desc: "LLM orchestration, prompt design, and agents.",
               },
             ],
           },
@@ -160,15 +160,15 @@ export const FolderTabPortfolio: React.FC<FolderTabPortfolioProps> = ({ onBack }
             skills: [
               {
                 name: "Next.js & React",
-                desc: "Modern frontend development, component-driven UI architecture, state management, and responsive web applications.",
+                desc: "Component UI architecture, hooks, and responsive apps.",
               },
               {
                 name: "Git & GitHub",
-                desc: "Version control, branch management, collaborative workflows, and repository management.",
+                desc: "Version control, branching workflows, and collaboration.",
               },
               {
-                name: "Developer Tools",
-                desc: "Visual Studio Code, Figma, modern developer tooling, and command-line workflows.",
+                name: "Developer Tooling",
+                desc: "VS Code, Figma, and POSIX shell toolchains.",
               },
             ],
           },
@@ -181,70 +181,69 @@ export const FolderTabPortfolio: React.FC<FolderTabPortfolioProps> = ({ onBack }
         ]}
         projects={[
           {
-            title: "AWS Trek - Digital Xerox & Stationery",
+            title: "AWS Trek",
             category: "cloud",
             year: "2026",
-            summary: "Digital Xerox & Stationery platform engineered for streamlined document processing, printing workflows, and campus stationery management.",
-            client: "Campus Printing Systems",
+            summary: "Campus printing and stationery platform with automated queue management and document processing.",
+            client: "Campus Systems",
             role: "Full Stack & Cloud Deployer",
             tools: ["React", "Node.js", "Express", "AWS ALB", "MongoDB", "Tailwind CSS"],
             mark: "TREK",
             href: "http://aws-trek-alb-164819343.ap-south-1.elb.amazonaws.com",
             github: "https://github.com/sujeelmarapatla-14AA/aws-trek",
             body: [
-              "Engineered full-stack digital stationery and printing workflow system reducing student queue times for campus document printing.",
-              "Deployed high-availability cloud infrastructure utilizing AWS Application Load Balancer (ALB) and EC2 instances.",
-              "Integrated secure order management, real-time printing status notifications, and dynamic file upload pipelines.",
+              "Full-stack ordering system reducing student queue times for campus printing.",
+              "High-availability deployment on AWS with Application Load Balancer (ALB) and EC2.",
+              "Real-time order tracking and secure file upload pipeline.",
             ],
           },
           {
-            title: "CareQ - Hospital Management System",
+            title: "CareQ",
             category: "health",
             year: "2026",
-            summary: "Modern Hospital & Clinical Management platform featuring appointment scheduling, queue management, doctor-patient interactions, and records management.",
-            client: "Healthcare Management",
+            summary: "Hospital management platform with dynamic appointment booking and clinical queue tracking.",
+            client: "Healthcare",
             role: "Lead Full Stack Engineer",
             tools: ["Next.js", "TypeScript", "React", "Vercel", "Tailwind CSS", "PostgreSQL"],
             mark: "CARE",
             href: "https://care-q-fgy2.vercel.app",
             github: "https://github.com/sujeelmarapatla-14AA/careQ",
             body: [
-              "Developed comprehensive healthcare management platform streamlining clinical workflows, OPD queues, and patient records.",
-              "Built dynamic appointment booking interface with doctor availability tracking and automated notifications.",
-              "Deployed on Vercel with responsive mobile-first UI for seamless patient and hospital staff accessibility.",
+              "Streamlines clinical OPD queues, patient records, and doctor scheduling.",
+              "Dynamic appointment booking with real-time availability tracking.",
+              "Deployed on Vercel with responsive mobile-first interface.",
             ],
           },
           {
-            title: "PortFolio Web App",
+            title: "PortFolio",
             category: "creative",
             year: "2026",
-            summary: "Personal portfolio web application showcasing projects, technical certifications, academic achievements, and interactive design experiences.",
-            client: "Personal Portfolio",
-            role: "Frontend Architect & Designer",
+            summary: "Personal portfolio web application showcasing projects, technical certifications, and system architecture.",
+            client: "Portfolio",
+            role: "Frontend Architect",
             tools: ["React", "JavaScript", "HTML5", "CSS3", "Render", "Vite"],
             mark: "PORT",
             href: "https://portfolio-sujeel.onrender.com/",
             github: "https://github.com/sujeelmarapatla-14AA/PortFolio",
             body: [
-              "Designed and deployed responsive multi-section portfolio showcasing projects, verified certifications, and interactive profile components.",
-              "Built lightweight, performant single-page architecture deployed on Render cloud platform.",
-              "Incorporated certificate viewer modals, project showcase tabs, and direct contact integration.",
+              "Single-page application with modular sheet architecture deployed on Render.",
+              "Interactive certificate lightbox modals, 3D orbits, and credential verification.",
             ],
           },
           {
-            title: "OneProfile - AI-Powered EdTech Vault",
+            title: "OneProfile",
             category: "edtech",
             year: "2026",
-            summary: "AI-Powered centralized EdTech application vault and academic credential management system designed to streamline student profiles and portfolio generation.",
-            client: "EdTech & Academic Profiles",
+            summary: "Academic credential vault with AI-powered skill tagging and automated portfolio synthesis.",
+            client: "EdTech",
             role: "AI & Systems Developer",
             tools: ["Python", "React", "AI/ML Workflows", "FastAPI", "MongoDB"],
             mark: "VAULT",
             github: "https://github.com/sujeelmarapatla-14AA",
             body: [
-              "Conceptualized and developed unified academic portfolio vault consolidating verified credentials, hackathon submissions, and coursework.",
-              "Integrated intelligent skill tagging and AI profile synthesis for engineering students.",
-              "Engineered secure schema for credential storage and instant sharing with academic institutions and recruiters.",
+              "Consolidates verified credentials, coursework, and project repositories.",
+              "AI-assisted skill extraction and profile generation for engineering students.",
+              "Secure credential schema for sharing with institutions and recruiters.",
             ],
           },
         ]}
@@ -254,7 +253,7 @@ export const FolderTabPortfolio: React.FC<FolderTabPortfolioProps> = ({ onBack }
             issuer: "JioPC & Jio Institute",
             date: "2026",
             image: "/certificates/ai-foundation.png",
-            description: "Foundational certification covering core Artificial Intelligence concepts, machine learning fundamentals, and modern computational applications.",
+            description: "Core artificial intelligence concepts and machine learning fundamentals.",
             tone: "blue",
           },
           {
@@ -262,7 +261,7 @@ export const FolderTabPortfolio: React.FC<FolderTabPortfolioProps> = ({ onBack }
             issuer: "Design Labs - Autodesk Partner",
             date: "March 2026",
             image: "/certificates/autodesk-fusion.jpg",
-            description: "Hands-on certification in 3D design modeling, parametric engineering, generative design principles, and rapid prototyping with Autodesk Fusion.",
+            description: "Parametric 3D CAD modeling and rapid prototyping with Autodesk Fusion.",
             tone: "green",
           },
           {
@@ -270,7 +269,7 @@ export const FolderTabPortfolio: React.FC<FolderTabPortfolioProps> = ({ onBack }
             issuer: "CIE - MLR Institute of Technology",
             date: "April 2026",
             image: "/certificates/web-dev-workshop.jpg",
-            description: "Intensive practical workshop on modern web technologies, full-stack application development, responsive design, and API architectures conducted by Centre for Innovation & Entrepreneurship.",
+            description: "Full-stack web application development and API architectures.",
             tone: "orange",
           },
           {
@@ -279,7 +278,7 @@ export const FolderTabPortfolio: React.FC<FolderTabPortfolioProps> = ({ onBack }
             date: "August 2026",
             image: "/certificates/mongodb-basics.jpg",
             verifyUrl: "https://www.credly.com/badges/e2a3e5af-3db9-43e7-b3f4-2aefae156214",
-            description: "Official MongoDB credential validating proficiency in document database architecture, CRUD operations, indexing, aggregation pipelines, and schema modeling.",
+            description: "Document database architecture, CRUD operations, indexing, and schema modeling.",
             tone: "green",
           },
         ]}
