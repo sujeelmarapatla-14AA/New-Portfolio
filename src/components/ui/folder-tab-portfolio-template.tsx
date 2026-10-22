@@ -15,6 +15,7 @@
 import * as React from "react"
 import CircularGallery, { type CircularGalleryItem } from "./CircularGallery"
 import CurvedLoop from "./CurvedLoop"
+import DecryptedText from "./DecryptedText"
 
 export type { CircularGalleryItem }
 
@@ -652,6 +653,9 @@ const FTP_CSS = `
 .ftp-mast-tab{position:relative;display:flex;align-items:center;gap:6px;padding:14px 34px 20px 22px;background:var(--ftp-blue);color:#fff;border-bottom-right-radius:34px}
 .ftp-mast-tab::after{content:"";position:absolute;top:0;left:100%;width:34px;height:34px;background:radial-gradient(circle at 100% 100%,transparent 33.5px,var(--ftp-blue) 34px)}
 .ftp-mast-tab .ftp-st{height:clamp(26px,4.2vw,46px);width:auto}
+.ftp-mast-decrypted{display:inline-flex;align-items:center;font-family:var(--font-heading,ui-sans-serif,system-ui,-apple-system,sans-serif);font-size:clamp(26px,3.8vw,44px);font-weight:800;letter-spacing:.08em;line-height:1;color:#fff;user-select:none;cursor:pointer;text-transform:uppercase}
+.ftp-mast-decrypted-revealed{color:#fff;transition:color .3s ease}
+.ftp-mast-decrypted-scrambled{color:rgba(255,255,255,.75);text-shadow:0 0 10px rgba(255,255,255,.5)}
 .ftp-reg{align-self:flex-start;margin-top:2px;font-size:13px;font-weight:700}
 .ftp-mast-notes{display:flex;align-items:center;flex-wrap:wrap;justify-content:flex-end;gap:6px 14px;padding:24px 24px 0 0;font-size:clamp(14px,1.7vw,20px);color:var(--ftp-blue);letter-spacing:.06em}
 .ftp-mast-notes i{width:1.5px;height:16px;background:var(--ftp-blue);opacity:.6}
@@ -1971,7 +1975,20 @@ export default function FolderTabPortfolioTemplate({
         <div className="ftp-mast-strip" />
         <div className="ftp-mast-row">
           <div className="ftp-mast-tab">
-            <StrokeText text={word} weight={17} tracking={20} color="#ffffff" ligatures={ligatures} label={word + ", " + name} />
+            <DecryptedText
+              text={word}
+              animateOn="inViewHover"
+              effect="scramble"
+              sequential={true}
+              revealDirection="start"
+              speed={55}
+              maxIterations={10}
+              scrambleColor="rgba(255, 255, 255, 0.75)"
+              characters="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+"
+              parentClassName="ftp-mast-decrypted"
+              className="ftp-mast-decrypted-revealed"
+              encryptedClassName="ftp-mast-decrypted-scrambled"
+            />
             <span className="ftp-reg" aria-hidden="true">®</span>
           </div>
           <div className="ftp-mast-notes">
