@@ -7,6 +7,7 @@ import { Navbar } from './components/Navbar'
 import { HeroContent } from './components/HeroContent'
 import { FolderTabPortfolio } from './components/FolderTabPortfolio'
 import { CustomCursor } from './components/CustomCursor'
+import { WaveTransition, type WaveTransitionHandle } from './components/WaveTransition'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -18,6 +19,7 @@ export const App: React.FC = () => {
   const heroButtonRef = useRef<HTMLButtonElement | null>(null)
   const heroArrowRef = useRef<SVGSVGElement | null>(null)
   const heroRippleRef = useRef<HTMLSpanElement | null>(null)
+  const waveTransitionRef = useRef<WaveTransitionHandle | null>(null)
 
   const lenisRef = useRef<Lenis | null>(null)
   const isTransitioningRef = useRef<boolean>(false)
@@ -71,7 +73,7 @@ export const App: React.FC = () => {
     return () => observer.disconnect()
   }, [])
 
-  // Cinematic Transition: Hero Launch Button -> Main Portfolio
+  // Cinematic Abstract Red Wave Transition: Hero Launch Button -> Main Portfolio
   const handleLaunch = useCallback(() => {
     if (isTransitioningRef.current) return
     const portfolioEl = portfolioSectionRef.current
@@ -104,44 +106,23 @@ export const App: React.FC = () => {
     const portfolioCover =
       portfolioEl.querySelector<HTMLElement>('.ftp-sheet') || portfolioEl
 
-    // Master Cinematic Transition Timeline
-    const tl = gsap.timeline({
-      onComplete: () => {
-        // Clear inline properties on completion to keep hero in pristine state when scrolling back
-        gsap.set([heroContent, heroNavbar, heroButton, heroArrow, heroRipple], {
-          clearProps: 'all',
-        })
-        gsap.set(portfolioCover, { clearProps: 'all' })
-        isTransitioningRef.current = false
-        setIsTransitioning(false)
-      },
-    })
-
-    // Phase 1 (0.0s - 0.2s): Immediate tactile click response on Launch button
+    // 1. Immediate tactile click feedback on the Launch button
     if (heroButton) {
-      tl.to(
-        heroButton,
-        {
-          scale: 0.94,
-          duration: 0.18,
-          ease: 'power2.out',
-        },
-        0
-      )
+      gsap.to(heroButton, {
+        scale: 0.94,
+        duration: 0.18,
+        ease: 'power2.out',
+      })
     }
     if (heroArrow) {
-      tl.to(
-        heroArrow,
-        {
-          x: 6,
-          duration: 0.2,
-          ease: 'power2.out',
-        },
-        0
-      )
+      gsap.to(heroArrow, {
+        x: 6,
+        duration: 0.2,
+        ease: 'power2.out',
+      })
     }
     if (heroRipple) {
-      tl.fromTo(
+      gsap.fromTo(
         heroRipple,
         { scale: 1, opacity: 0.7 },
         {
@@ -149,44 +130,36 @@ export const App: React.FC = () => {
           opacity: 0,
           duration: 0.45,
           ease: 'power2.out',
-        },
-        0.02
+        }
       )
     }
 
-    // Phase 2 (0.12s - 0.65s): Hero content gently gives way
-    // Subtle lift and gentle fade to guide focus downward
-    if (heroContent) {
-      tl.to(
-        heroContent,
-        {
-          y: -30,
-          opacity: 0.35,
-          duration: 0.55,
-          ease: 'power2.inOut',
-        },
-        0.12
-      )
-    }
-    if (heroNavbar) {
-      tl.to(
-        heroNavbar,
-        {
-          y: -18,
-          opacity: 0.35,
-          duration: 0.5,
-          ease: 'power2.inOut',
-        },
-        0.12
-      )
-    }
-
-    // Phase 3 (0.15s - 1.25s): Synchronized Lenis camera glide into main portfolio
-    tl.call(
+    // 2. Animate the fluid abstract red waves across the viewport
+    waveTransitionRef.current?.animateWaveTransition(
+      // On Peak (t = 0.65s): Waves crest across the viewport
       () => {
+        // Hero content lifts and fades behind the wave curtain
+        if (heroContent) {
+          gsap.to(heroContent, {
+            y: -25,
+            opacity: 0.2,
+            duration: 0.5,
+            ease: 'power2.inOut',
+          })
+        }
+        if (heroNavbar) {
+          gsap.to(heroNavbar, {
+            y: -16,
+            opacity: 0.2,
+            duration: 0.45,
+            ease: 'power2.inOut',
+          })
+        }
+
+        // Viewport moves seamlessly to main portfolio section behind the cresting waves
         if (lenisRef.current) {
           lenisRef.current.scrollTo(portfolioEl, {
-            duration: 1.1,
+            duration: 0.85,
             easing: (t: number) =>
               t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
             lock: true,
@@ -194,25 +167,35 @@ export const App: React.FC = () => {
         } else {
           portfolioEl.scrollIntoView({ behavior: 'smooth' })
         }
-      },
-      [],
-      0.15
-    )
 
-    // Phase 4 (0.65s - 1.25s): Portfolio content reveal and natural settle
-    if (portfolioCover) {
-      tl.fromTo(
-        portfolioCover,
-        { y: 36, opacity: 0.65 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: 'power3.out',
-        },
-        0.65
-      )
-    }
+        // Prepare the first portfolio sheet to settle into view as waves part
+        if (portfolioCover) {
+          gsap.fromTo(
+            portfolioCover,
+            { y: 32, opacity: 0.65 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.7,
+              ease: 'power3.out',
+              delay: 0.2,
+            }
+          )
+        }
+      },
+      // On Complete (t = 1.65s): Waves have swept off and dissolved cleanly
+      () => {
+        // Clean up temporary styles on hero so it remains pristine when scrolled back
+        gsap.set([heroContent, heroNavbar, heroButton, heroArrow, heroRipple], {
+          clearProps: 'all',
+        })
+        if (portfolioCover) {
+          gsap.set(portfolioCover, { clearProps: 'all' })
+        }
+        isTransitioningRef.current = false
+        setIsTransitioning(false)
+      }
+    )
   }, [])
 
   // Smooth scroll back to hero (invoked via Escape key or back trigger)
@@ -250,6 +233,9 @@ export const App: React.FC = () => {
     <main className="relative w-full selection:bg-black selection:text-white">
       {/* Premium minimal rounded black custom cursor */}
       <CustomCursor />
+
+      {/* Abstract Red Wave Cinematic Transition Layer */}
+      <WaveTransition ref={waveTransitionRef} />
 
       {/* Hero Landing Section */}
       <section

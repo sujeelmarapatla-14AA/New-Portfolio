@@ -52,8 +52,6 @@ export const FolderTabPortfolio = forwardRef<HTMLDivElement, FolderTabPortfolioP
           yellow: "#B8242F", // Rich Cardinal Red
         }}
         chapters={[
-          { title: "Profile", points: ["B.Tech CSE (AIML)", "MLRIT Hyderabad"], target: "cover" },
-          { title: "Contents", points: ["Portfolio Index", "Quick Navigation"], target: "contents" },
           { title: "About", points: ["Academic Background", "Education History"], target: "about" },
           { title: "Skills", points: ["AI/ML, Python, Java", "Full-Stack & Systems"], target: "skills" },
           { title: "Projects", points: ["AWS Trek, CareQ", "PortFolio, OneProfile"], target: "work" },
