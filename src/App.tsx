@@ -106,29 +106,40 @@ export const App: React.FC = () => {
     const portfolioCover =
       portfolioEl.querySelector<HTMLElement>('.ftp-sheet') || portfolioEl
 
-    // 1. Immediate tactile click feedback on the Launch button
+    // 1. Immediate tactile click feedback on the Launch button with buoyant bounce
     if (heroButton) {
-      gsap.to(heroButton, {
-        scale: 0.95,
-        duration: 0.18,
-        ease: 'power2.out',
-      })
+      gsap.timeline()
+        .to(heroButton, {
+          scale: 0.93,
+          duration: 0.12,
+          ease: 'power2.out',
+        })
+        .to(heroButton, {
+          scale: 1.03,
+          duration: 0.22,
+          ease: 'back.out(2)',
+        })
+        .to(heroButton, {
+          scale: 1,
+          duration: 0.16,
+          ease: 'power1.out',
+        })
     }
     if (heroArrow) {
       gsap.to(heroArrow, {
         x: 6,
         duration: 0.2,
-        ease: 'power2.out',
+        ease: 'back.out(2)',
       })
     }
     if (heroRipple) {
       gsap.fromTo(
         heroRipple,
-        { scale: 1, opacity: 0.7 },
+        { scale: 0.9, opacity: 0.75 },
         {
-          scale: 1.8,
+          scale: 1.85,
           opacity: 0,
-          duration: 0.45,
+          duration: 0.48,
           ease: 'power2.out',
         }
       )
@@ -136,14 +147,14 @@ export const App: React.FC = () => {
 
     // 2. Animate the fluid abstract red waves across the viewport
     waveTransitionRef.current?.animateWaveTransition(
-      // On Peak (t = 0.68s): Waves crest fully across the viewport with ambient velvet veil
+      // On Peak (t = 0.65s): Waves crest fully across the viewport
       () => {
         // Hero content lifts and fades behind the wave curtain
         if (heroContent) {
           gsap.to(heroContent, {
             y: -25,
             opacity: 0,
-            duration: 0.45,
+            duration: 0.42,
             ease: 'sine.inOut',
           })
         }
@@ -151,7 +162,7 @@ export const App: React.FC = () => {
           gsap.to(heroNavbar, {
             y: -16,
             opacity: 0,
-            duration: 0.4,
+            duration: 0.38,
             ease: 'sine.inOut',
           })
         }
@@ -159,7 +170,7 @@ export const App: React.FC = () => {
         // Viewport moves seamlessly to main portfolio section behind the cresting waves
         if (lenisRef.current) {
           lenisRef.current.scrollTo(portfolioEl, {
-            duration: 0.95,
+            duration: 0.9,
             easing: (t: number) =>
               t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
             lock: true,
@@ -168,17 +179,17 @@ export const App: React.FC = () => {
           portfolioEl.scrollIntoView({ behavior: 'smooth' })
         }
 
-        // Prepare the first portfolio sheet to settle into view as waves part
+        // Prepare the first portfolio sheet to settle into view as trailing wave uncovers it
         if (portfolioCover) {
           gsap.fromTo(
             portfolioCover,
-            { y: 24, opacity: 0.7 },
+            { y: 26, opacity: 0.75 },
             {
               y: 0,
               opacity: 1,
-              duration: 0.65,
-              ease: 'power2.out',
-              delay: 0.25,
+              duration: 0.68,
+              ease: 'back.out(1.2)',
+              delay: 0.22,
             }
           )
         }
