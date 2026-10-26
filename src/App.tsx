@@ -109,7 +109,7 @@ export const App: React.FC = () => {
     // 1. Immediate tactile click feedback on the Launch button
     if (heroButton) {
       gsap.to(heroButton, {
-        scale: 0.94,
+        scale: 0.95,
         duration: 0.18,
         ease: 'power2.out',
       })
@@ -136,30 +136,30 @@ export const App: React.FC = () => {
 
     // 2. Animate the fluid abstract red waves across the viewport
     waveTransitionRef.current?.animateWaveTransition(
-      // On Peak (t = 0.65s): Waves crest across the viewport
+      // On Peak (t = 0.68s): Waves crest fully across the viewport with ambient velvet veil
       () => {
         // Hero content lifts and fades behind the wave curtain
         if (heroContent) {
           gsap.to(heroContent, {
             y: -25,
-            opacity: 0.2,
-            duration: 0.5,
-            ease: 'power2.inOut',
+            opacity: 0,
+            duration: 0.45,
+            ease: 'sine.inOut',
           })
         }
         if (heroNavbar) {
           gsap.to(heroNavbar, {
             y: -16,
-            opacity: 0.2,
-            duration: 0.45,
-            ease: 'power2.inOut',
+            opacity: 0,
+            duration: 0.4,
+            ease: 'sine.inOut',
           })
         }
 
         // Viewport moves seamlessly to main portfolio section behind the cresting waves
         if (lenisRef.current) {
           lenisRef.current.scrollTo(portfolioEl, {
-            duration: 0.85,
+            duration: 0.95,
             easing: (t: number) =>
               t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
             lock: true,
@@ -172,18 +172,18 @@ export const App: React.FC = () => {
         if (portfolioCover) {
           gsap.fromTo(
             portfolioCover,
-            { y: 32, opacity: 0.65 },
+            { y: 24, opacity: 0.7 },
             {
               y: 0,
               opacity: 1,
-              duration: 0.7,
-              ease: 'power3.out',
-              delay: 0.2,
+              duration: 0.65,
+              ease: 'power2.out',
+              delay: 0.25,
             }
           )
         }
       },
-      // On Complete (t = 1.65s): Waves have swept off and dissolved cleanly
+      // On Complete (t = 1.75s): Waves have swept off and dissolved cleanly
       () => {
         // Clean up temporary styles on hero so it remains pristine when scrolled back
         gsap.set([heroContent, heroNavbar, heroButton, heroArrow, heroRipple], {
