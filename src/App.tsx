@@ -7,7 +7,7 @@ import { Navbar } from './components/Navbar'
 import { HeroContent } from './components/HeroContent'
 import { FolderTabPortfolio } from './components/FolderTabPortfolio'
 import { CustomCursor } from './components/CustomCursor'
-import { WaveTransition, type WaveTransitionHandle } from './components/WaveTransition'
+import SweepPageTransition from './components/ui/SweepPageTransition'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -19,12 +19,12 @@ export const App: React.FC = () => {
   const heroButtonRef = useRef<HTMLButtonElement | null>(null)
   const heroArrowRef = useRef<SVGSVGElement | null>(null)
   const heroRippleRef = useRef<HTMLSpanElement | null>(null)
-  const waveTransitionRef = useRef<WaveTransitionHandle | null>(null)
 
   const lenisRef = useRef<Lenis | null>(null)
   const isTransitioningRef = useRef<boolean>(false)
   const [isTransitioning, setIsTransitioning] = useState<boolean>(false)
   const [isHeroInView, setIsHeroInView] = useState<boolean>(true)
+  const [sweepTrigger, setSweepTrigger] = useState<number>(0)
 
   // Initialize Lenis smooth scroll synchronized with GSAP ticker & ScrollTrigger
   useEffect(() => {
@@ -73,14 +73,12 @@ export const App: React.FC = () => {
     return () => observer.disconnect()
   }, [])
 
-  // Cinematic Abstract Red Wave Transition: Hero Launch Button -> Main Portfolio
+  // Great UI Sweep Page Transition: Hero Launch Button -> Main Portfolio
   const handleLaunch = useCallback(() => {
     if (isTransitioningRef.current) return
     const portfolioEl = portfolioSectionRef.current
     if (!portfolioEl) return
 
-    const heroContent = heroContentRef.current
-    const heroNavbar = heroNavbarRef.current
     const heroButton = heroButtonRef.current
     const heroArrow = heroArrowRef.current
     const heroRipple = heroRippleRef.current
@@ -102,11 +100,7 @@ export const App: React.FC = () => {
     isTransitioningRef.current = true
     setIsTransitioning(true)
 
-    // Locate the first main sheet / cover inside the portfolio for the settling reveal
-    const portfolioCover =
-      portfolioEl.querySelector<HTMLElement>('.ftp-sheet') || portfolioEl
-
-    // 1. Immediate tactile click feedback on the Launch button with buoyant bounce
+    // 1. Immediate tactile click feedback on the Launch button
     if (heroButton) {
       gsap.timeline()
         .to(heroButton, {
@@ -116,97 +110,66 @@ export const App: React.FC = () => {
         })
         .to(heroButton, {
           scale: 1.03,
-          duration: 0.22,
+          duration: 0.2,
           ease: 'back.out(2)',
         })
         .to(heroButton, {
           scale: 1,
-          duration: 0.16,
+          duration: 0.15,
           ease: 'power1.out',
         })
     }
     if (heroArrow) {
       gsap.to(heroArrow, {
         x: 6,
-        duration: 0.2,
+        duration: 0.18,
         ease: 'back.out(2)',
       })
     }
     if (heroRipple) {
       gsap.fromTo(
         heroRipple,
-        { scale: 0.9, opacity: 0.75 },
+        { scale: 0.9, opacity: 0.8 },
         {
           scale: 1.85,
           opacity: 0,
-          duration: 0.48,
+          duration: 0.45,
           ease: 'power2.out',
         }
       )
     }
 
-    // 2. Animate the fluid abstract red waves across the viewport
-    waveTransitionRef.current?.animateWaveTransition(
-      // On Peak (t = 0.65s): Waves crest fully across the viewport
-      () => {
-        // Hero content lifts and fades behind the wave curtain
-        if (heroContent) {
-          gsap.to(heroContent, {
-            y: -25,
-            opacity: 0,
-            duration: 0.42,
-            ease: 'sine.inOut',
-          })
-        }
-        if (heroNavbar) {
-          gsap.to(heroNavbar, {
-            y: -16,
-            opacity: 0,
-            duration: 0.38,
-            ease: 'sine.inOut',
-          })
-        }
+    // 2. Trigger Great UI Sweep Page Transition
+    setSweepTrigger((prev) => prev + 1)
+  }, [])
 
-        // Viewport moves seamlessly to main portfolio section behind the cresting waves
-        if (lenisRef.current) {
-          lenisRef.current.scrollTo(portfolioEl, {
-            duration: 0.9,
-            easing: (t: number) =>
-              t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
-            lock: true,
-          })
-        } else {
-          portfolioEl.scrollIntoView({ behavior: 'smooth' })
-        }
+  // Called when all sweep sheets have fully covered the viewport
+  const handleViewSwap = useCallback(() => {
+    const portfolioEl = portfolioSectionRef.current
+    if (!portfolioEl) return
 
-        // Prepare the first portfolio sheet to settle into view as trailing wave uncovers it
-        if (portfolioCover) {
-          gsap.fromTo(
-            portfolioCover,
-            { y: 26, opacity: 0.75 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.68,
-              ease: 'back.out(1.2)',
-              delay: 0.22,
-            }
-          )
-        }
-      },
-      // On Complete (t = 1.75s): Waves have swept off and dissolved cleanly
-      () => {
-        // Clean up temporary styles on hero so it remains pristine when scrolled back
-        gsap.set([heroContent, heroNavbar, heroButton, heroArrow, heroRipple], {
-          clearProps: 'all',
-        })
-        if (portfolioCover) {
-          gsap.set(portfolioCover, { clearProps: 'all' })
-        }
-        isTransitioningRef.current = false
-        setIsTransitioning(false)
-      }
-    )
+    // Seamlessly position viewport at main portfolio while screen is fully covered by sweep sheets
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(portfolioEl, {
+        immediate: true,
+      })
+    } else {
+      portfolioEl.scrollIntoView()
+    }
+
+    // Clear temporary button transforms
+    if (heroButtonRef.current) {
+      gsap.set(heroButtonRef.current, { clearProps: 'all' })
+    }
+    if (heroArrowRef.current) {
+      gsap.set(heroArrowRef.current, { clearProps: 'all' })
+    }
+
+    // Restore interaction flag after exit animation finishes
+    setTimeout(() => {
+      isTransitioningRef.current = false
+      setIsTransitioning(false)
+    }, 850)
   }, [])
 
   // Smooth scroll back to hero (invoked via Escape key or back trigger)
@@ -245,8 +208,17 @@ export const App: React.FC = () => {
       {/* Premium minimal rounded black custom cursor */}
       <CustomCursor />
 
-      {/* Abstract Red Wave Cinematic Transition Layer */}
-      <WaveTransition ref={waveTransitionRef} />
+      {/* Great UI Sweep Page Transition Component */}
+      <SweepPageTransition
+        trigger={sweepTrigger}
+        onViewSwap={handleViewSwap}
+        colors={["#f72c25", "#d6182c", "#a80f1e", "#54060e", "#151112"]}
+        direction="bottom"
+        exitOpposite={true}
+        duration={0.65}
+        staggerDelay={0.08}
+        ease={[0.76, 0, 0.24, 1]}
+      />
 
       {/* Hero Landing Section */}
       <section

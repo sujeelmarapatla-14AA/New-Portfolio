@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
+      '@': path.resolve(import.meta.dirname, 'src'),
       '@designcodeio/threeui/style.css': path.resolve(import.meta.dirname, 'src/shaders/threeui.css'),
       '@designcodeio/threeui': path.resolve(import.meta.dirname, 'src/shaders/threeui-index.tsx'),
     },
