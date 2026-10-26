@@ -3,8 +3,14 @@ import React, { useEffect, useRef, useCallback } from 'react'
 const TOTAL_FRAMES = 76
 const SENSITIVITY = 0.8
 
-export const BackgroundVideo: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+export interface BackgroundVideoProps {
+  isActive?: boolean
+  canvasRef?: React.RefObject<HTMLCanvasElement | null>
+}
+
+export const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ isActive = true, canvasRef: externalCanvasRef }) => {
+  const localCanvasRef = useRef<HTMLCanvasElement | null>(null)
+  const canvasRef = externalCanvasRef || localCanvasRef
   const framesRef = useRef<HTMLImageElement[]>([])
   const currentFrameIndexRef = useRef<number>(0)
   const prevXRef = useRef<number | null>(null)
@@ -86,8 +92,10 @@ export const BackgroundVideo: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize)
   }, [drawFrame])
 
-  // Scrubbing logic via mousemove and touchmove
+  // Scrubbing logic via mousemove and touchmove (active while hero is in view)
   useEffect(() => {
+    if (!isActive) return
+
     const handleMouseMove = (e: MouseEvent) => {
       const currentX = e.clientX
 
@@ -155,14 +163,14 @@ export const BackgroundVideo: React.FC = () => {
       window.removeEventListener('touchend', handleTouchEnd)
       window.removeEventListener('mouseleave', handleMouseLeave)
     }
-  }, [drawFrame])
+  }, [drawFrame, isActive])
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full z-0 pointer-events-none select-none"
+      className="absolute inset-0 w-full h-full z-0 pointer-events-none select-none"
       style={{
-        position: 'fixed',
+        position: 'absolute',
         inset: 0,
         zIndex: 0,
       }}

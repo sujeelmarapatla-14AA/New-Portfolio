@@ -1,8 +1,15 @@
-import React from 'react'
+import { forwardRef } from 'react'
 
-export const Navbar: React.FC = () => {
+export interface NavbarProps {
+  onContactClick?: () => void
+}
+
+export const Navbar = forwardRef<HTMLElement, NavbarProps>(({ onContactClick }, ref) => {
   return (
-    <header className="fixed top-0 left-0 w-full z-10 px-5 sm:px-8 py-4 sm:py-5 flex flex-row justify-between items-center select-none">
+    <header
+      ref={ref}
+      className="absolute top-0 left-0 w-full z-10 px-5 sm:px-8 py-4 sm:py-5 flex flex-row justify-between items-center select-none"
+    >
       {/* Logo (left) */}
       <div className="flex flex-row items-center gap-3">
         <a
@@ -25,7 +32,13 @@ export const Navbar: React.FC = () => {
       {/* Get in touch button-like text (top right) */}
       <div className="flex items-center">
         <a
-          href="mailto:contact@sujeel.me"
+          href="mailto:sujeelmarapatla@gmail.com"
+          onClick={(e) => {
+            if (onContactClick) {
+              e.preventDefault()
+              onContactClick()
+            }
+          }}
           className="inline-flex items-center justify-center px-4 sm:px-5 py-1.5 sm:py-2 text-[14px] sm:text-[16px] text-black bg-white/90 hover:bg-black hover:text-white border border-black/15 rounded-full transition-all duration-200 tracking-tight font-medium shadow-sm hover:shadow active:scale-95 cursor-pointer backdrop-blur-sm"
           aria-label="Get in touch"
         >
@@ -34,4 +47,6 @@ export const Navbar: React.FC = () => {
       </div>
     </header>
   )
-}
+})
+
+Navbar.displayName = 'Navbar'

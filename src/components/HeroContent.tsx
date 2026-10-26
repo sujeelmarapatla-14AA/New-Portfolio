@@ -1,13 +1,28 @@
 import React from 'react'
 
-interface HeroContentProps {
+export interface HeroContentProps {
   onLaunch: () => void
+  isTransitioning?: boolean
+  contentRef?: React.RefObject<HTMLDivElement | null>
+  buttonRef?: React.RefObject<HTMLButtonElement | null>
+  arrowRef?: React.RefObject<SVGSVGElement | null>
+  rippleRef?: React.RefObject<HTMLSpanElement | null>
 }
 
-export const HeroContent: React.FC<HeroContentProps> = ({ onLaunch }) => {
+export const HeroContent: React.FC<HeroContentProps> = ({
+  onLaunch,
+  isTransitioning = false,
+  contentRef,
+  buttonRef,
+  arrowRef,
+  rippleRef
+}) => {
   return (
     <section className="relative z-10 w-full h-screen min-h-screen flex flex-col justify-end items-end pl-4 pr-5 sm:pr-8 md:pr-10 lg:pr-12 xl:pr-14 pb-10 sm:pb-14 md:pb-16 lg:pb-20 pointer-events-none select-none">
-      <div className="w-full max-w-[410px] sm:max-w-[440px] lg:max-w-[460px] text-left pointer-events-auto">
+      <div
+        ref={contentRef}
+        className="w-full max-w-[410px] sm:max-w-[440px] lg:max-w-[460px] text-left pointer-events-auto transition-transform"
+      >
         {/* Eyebrow */}
         <div
           className="text-[12px] sm:text-[13px] font-semibold tracking-[0.24em] text-black/85 uppercase mb-3 sm:mb-4 select-none"
@@ -32,15 +47,25 @@ export const HeroContent: React.FC<HeroContentProps> = ({ onLaunch }) => {
         </p>
 
         {/* Launch Portfolio Button */}
-        <div className="flex items-center gap-4">
+        <div className="relative flex items-center gap-4">
+          {/* Subtle focal ripple ring expanding on launch */}
+          <span
+            ref={rippleRef}
+            className="absolute inset-0 rounded-full border-2 border-black/40 pointer-events-none opacity-0"
+            aria-hidden="true"
+          />
+
           <button
+            ref={buttonRef}
             type="button"
             onClick={onLaunch}
-            className="inline-flex items-center gap-3 bg-white text-black px-6 sm:px-7 py-3 sm:py-3.5 rounded-full text-[14px] sm:text-[15px] font-medium hover:bg-black hover:text-white transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 cursor-pointer select-none group"
+            disabled={isTransitioning}
+            className={`inline-flex items-center gap-3 bg-white text-black px-6 sm:px-7 py-3 sm:py-3.5 rounded-full text-[14px] sm:text-[15px] font-medium hover:bg-black hover:text-white transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 cursor-pointer select-none group relative ${isTransitioning ? 'pointer-events-none' : ''}`}
             aria-label="Launch Portfolio"
           >
             <span>Launch Portfolio</span>
             <svg
+              ref={arrowRef}
               width="16"
               height="16"
               viewBox="0 0 16 16"

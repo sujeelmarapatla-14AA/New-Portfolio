@@ -1,24 +1,29 @@
-import React, { useEffect } from 'react'
+import { useEffect, forwardRef } from 'react'
 import FolderTabPortfolioTemplate from './ui/folder-tab-portfolio-template'
 
-interface FolderTabPortfolioProps {
-  onBack: () => void
+export interface FolderTabPortfolioProps {
+  onBack?: () => void
 }
 
-export const FolderTabPortfolio: React.FC<FolderTabPortfolioProps> = ({ onBack }) => {
-  // Support ESC key to return back to hero
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onBack()
+export const FolderTabPortfolio = forwardRef<HTMLDivElement, FolderTabPortfolioProps>(
+  ({ onBack }, ref) => {
+    // Support ESC key to return back to hero
+    useEffect(() => {
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          onBack?.()
+        }
       }
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [onBack])
+      window.addEventListener('keydown', handleKeyDown)
+      return () => window.removeEventListener('keydown', handleKeyDown)
+    }, [onBack])
 
-  return (
-    <div className="relative w-full min-h-screen bg-[#151112] selection:bg-[#C52A35] selection:text-white">
+    return (
+      <div
+        ref={ref}
+        id="portfolio-section"
+        className="relative w-full min-h-screen bg-[#151112] selection:bg-[#C52A35] selection:text-white"
+      >
       {/* Floating Back to Hero removed per user request */}
 
       {/* The Folder Tab Portfolio with Migrated Personal Information */}
@@ -224,6 +229,9 @@ export const FolderTabPortfolio: React.FC<FolderTabPortfolioProps> = ({ onBack }
       />
     </div>
   )
-}
+})
+
+FolderTabPortfolio.displayName = 'FolderTabPortfolio'
 
 export default FolderTabPortfolio
+
