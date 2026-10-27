@@ -36,7 +36,7 @@ export default function SweepPageTransition({
 
   useEffect(() => {
     if (trigger > 0) {
-      setTimeout(() => setTransitionState("entering"), 0);
+      setTransitionState("entering");
 
       const numLayers = colors.length;
       const maxStagger = (numLayers - 1) * staggerDelay;
@@ -49,13 +49,13 @@ export default function SweepPageTransition({
 
       const exitTimeout = setTimeout(() => {
         setTransitionState("exiting");
-      }, totalAnimationTime + 50);
+      }, totalAnimationTime + 15);
 
       const idleTimeout = setTimeout(
         () => {
           setTransitionState("idle");
         },
-        totalAnimationTime * 2 + 50,
+        totalAnimationTime * 2 + 20,
       );
 
       return () => {

@@ -102,28 +102,19 @@ export const App: React.FC = () => {
 
     // 1. Immediate tactile click feedback on the Launch button
     if (heroButton) {
-      gsap.timeline()
-        .to(heroButton, {
-          scale: 0.93,
-          duration: 0.12,
-          ease: 'power2.out',
-        })
-        .to(heroButton, {
-          scale: 1.03,
-          duration: 0.2,
-          ease: 'back.out(2)',
-        })
-        .to(heroButton, {
-          scale: 1,
-          duration: 0.15,
-          ease: 'power1.out',
-        })
+      gsap.to(heroButton, {
+        scale: 0.94,
+        duration: 0.1,
+        ease: 'power2.out',
+        yoyo: true,
+        repeat: 1,
+      })
     }
     if (heroArrow) {
       gsap.to(heroArrow, {
         x: 6,
-        duration: 0.18,
-        ease: 'back.out(2)',
+        duration: 0.14,
+        ease: 'power2.out',
       })
     }
     if (heroRipple) {
@@ -133,7 +124,7 @@ export const App: React.FC = () => {
         {
           scale: 1.85,
           opacity: 0,
-          duration: 0.45,
+          duration: 0.35,
           ease: 'power2.out',
         }
       )
@@ -169,7 +160,7 @@ export const App: React.FC = () => {
     setTimeout(() => {
       isTransitioningRef.current = false
       setIsTransitioning(false)
-    }, 850)
+    }, 480)
   }, [])
 
   // Smooth scroll back to hero (invoked via Escape key or back trigger)
@@ -208,15 +199,15 @@ export const App: React.FC = () => {
       {/* Premium minimal rounded black custom cursor */}
       <CustomCursor />
 
-      {/* Great UI Sweep Page Transition Component */}
+      {/* Great UI Sweep Page Transition Component (Fast, responsive sweep) */}
       <SweepPageTransition
         trigger={sweepTrigger}
         onViewSwap={handleViewSwap}
-        colors={["#f72c25", "#d6182c", "#a80f1e", "#54060e", "#151112"]}
+        colors={["#f72c25", "#c52a35", "#800a16", "#151112"]}
         direction="bottom"
         exitOpposite={true}
-        duration={0.65}
-        staggerDelay={0.08}
+        duration={0.36}
+        staggerDelay={0.035}
         ease={[0.76, 0, 0.24, 1]}
       />
 
